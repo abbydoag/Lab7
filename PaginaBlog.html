@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peleas en RWBY</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/reiswar">  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/thegoodmonolith" rel="stylesheet"> <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  </head>
+    <style>
+      .font1 {        
+        font-family: 'Reiswar', sans-serif;/* Letra titulo */
+        color: #1e1c1c;
+        text-align: center;
+        font-size:45px;
+        margin-bottom: auto;       
+      }
+      .font1a {        
+        font-family: 'Reiswar', sans-serif;/* Letra subtitulo */
+        color: #3f3b3b;
+        text-align: center;
+        font-size:18px;
+        margin-bottom: auto;       
+      }
+      .font2 {
+        font-family: 'TheGoodMonolith', sans-serif; /* Letra contenido */
+        color: whitesmoke;
+        text-align: center;
+        font-size: 18px;
+        padding-bottom: 10px;
+      }
+      .body { 
+          background-color: #a93131c7;
+       }
+    </style>
+</head>
+<body class="body">
+    <h1 class="font1">Peleas en RWBY</h1>
+    <h2 class="font1a">¡Comparte tus escenas favoritas!</h2>
+    <div id="root"></div>
+    <script type="text/babel">
+    const App = () => {
+
+      const [content, setContent] = React.useState([])
+      
+      async function RWBYapi(){
+        let RWBYdata = await fetch('')
+      }
+
+      return (
+        <div>
+          <center>
+            <h3 class="font2">POSTS</h3>
+            {datos.map((c,index) =>{
+              return
+            }
+              
+              )}
+          </center>
+        </div>
+      )
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+    </script>
+    <audio controls autoplay loop>
+          <source src="RedLikeRosesII.ogg" type="audio/ogg">
+    </audio>
+</body>
+</html>
