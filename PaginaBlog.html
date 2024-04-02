@@ -42,33 +42,60 @@
     <h2 class="font1a">¡Comparte tus escenas favoritas!</h2>
     <div id="root"></div>
     <script type="text/babel">
-    const App = () => {
-
-      const [content, setContent] = React.useState([])
-      
-      async function RWBYapi(){
-        let RWBYdata = await fetch('')
-      }
-
+    const AppTabla = ({datos}) => {
       return (
         <div>
-          <center>
-            <h3 class="font2">POSTS</h3>
-            {datos.map((c,index) =>{
-              return
-            }
-              
-              )}
-          </center>
+            <h3 className="font2">POSTS</h3>
+            <table border="2">
+                <thead>
+                    <tr>
+                        <th>Post</th>
+                        <th>Contenido</th>
+                        <th>Episodio</th>
+                        <th>Pelea</th>
+                        <th>Soundtrack</th>
+                        <th>Video</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {datos.map((content, index) => (
+                        <tr key={index}>
+                            <td>{content.title}</td>
+                            <td>{content.content}</td>
+                            <td>{content.episode}</td>
+                            <td>{content.nameFight}</td>
+                            <td>{content.nameSoundtrack}</td>
+                            <td>
+                              <iframe width="560" height="315" src={content.fightVideo} frameborder="0"></iframe>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
       )
+    }
+    const  datos = [
+      {title: "Una pelea mini",
+      content: "Es una pelea que recordó a muchos el estilo que se tenía en los volúmenes más tempranos, la música y coreografía tienen un toque llamativo que hace que te emociones.",
+      episode: "Rude, Red, and Royal (Vol 9, ep 3)",
+      nameFight: "RWBY vs The Red Prince",
+      nameSoundtrack: "Checkmate",
+      fightVideo: "https://www.youtube.com/embed/q9RQnk7Oueo?si=ewmsF531pEnVJnv5&amp;start=34"},
+      {title: "Elegancia con la espada",
+      content: "Esta pelea demuestra el estilo que el personaje tiene al combatir",
+      episode: "White Trailer",
+      nameFight: "White Trailer",
+      nameSoundtrack: "Mirror, Mirror",
+      fightVideo: "https://www.youtube.com/embed/Vt9vl8iAN5Q?si=oIKsOwqXeKDCJCGg"}
+    ];
+
+    function App() {
+      return <AppTabla datos={datos} />;
     }
 
     const root = ReactDOM.createRoot(document.getElementById('root'))
     root.render(<App />)
     </script>
-    <audio controls autoplay loop>
-          <source src="RedLikeRosesII.ogg" type="audio/ogg">
-    </audio>
 </body>
 </html>
