@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Peleas en RWBY</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/reiswar">  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <link href="https://fonts.cdnfonts.com/css/thegoodmonolith" rel="stylesheet"> <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   </head>
@@ -67,61 +68,62 @@
     
     <div id="root"></div>
     <script type="text/babel">
-    const AppTabla = ({datos}) => {
-      return (
+    import React, { useState } from 'react';
+    const AppTabla=()=>{
+        const[datos, setDatos] = React.useState([]) //Hook call
+
+        async function apiRWBY(){
+          let blogPosts = await fetch('http://127.0.0.1:8001/all-posts')
+          let blogPosts_json = await blogPosts.json()
+
+          setDatos(blogPosts_json.results)
+        }
+        React.useEffect(()=>{
+          apiRWBY()
+        }, [])
+
+      return(
         <div>
-            <h3 className="font2">POSTS</h3>
-            <table border="2">
-                <thead>
-                    <tr>
-                        <th>Post</th>
-                        <th>Contenido</th>
-                        <th>Episodio</th>
-                        <th>Pelea</th>
-                        <th>Soundtrack</th>
-                        <th>Video</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {datos.map((content, index) => (
-                        <tr key={index}>
-                            <td>{content.title}</td>
-                            <td>{content.content}</td>
-                            <td>{content.episode}</td>
-                            <td>{content.nameFight}</td>
-                            <td>{content.nameSoundtrack}</td>
-                            <td>
-                              <iframe width="560" height="315" src={content.fightVideo} frameborder="0"></iframe>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table> 
-        </div> 
+          <h3 className="font2">POSTS</h3>
+          <table border="2">
+              <thead>
+                  <tr>
+                      <th>Post</th>
+                      <th>Contenido</th>
+                      <th>Episodio</th>
+                      <th>Pelea</th>
+                      <th>Soundtrack</th>
+                      <th>Video</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {datos.map((r, index) => (
+                      <tr key={index}>
+                          <td>{r.title}</td>
+                          <td>{r.content}</td>
+                          <td>{r.episode}</td>
+                          <td>{r.nameFight}</td>
+                          <td>{r.nameSoundtrack}</td>
+                          <td>
+                            <iframe
+                            width="560" 
+                            height="315" 
+                            src={r.fightVideo} 
+                            frameborder="0"
+                            ></iframe>
+                          </td>
+                      </tr>
+                    ))
+                  }
+              </tbody>
+          </table> 
+      </div> 
       )
     }
-    const  datos = [
-      {title: "Una pelea mini",
-      content: "Es una pelea que recordó a muchos el estilo que se tenía en los volúmenes más tempranos, la música y coreografía tienen un toque llamativo que hace que te emociones.",
-      episode: "Rude, Red, and Royal (Vol 9, ep 3)",
-      nameFight: "RWBY vs The Red Prince",
-      nameSoundtrack: "Checkmate",
-      fightVideo: "https://www.youtube.com/embed/q9RQnk7Oueo?si=ewmsF531pEnVJnv5&amp;start=34"},
-      {title: "Elegancia con la espada",
-      content: "Esta pelea demuestra el estilo que el personaje tiene al combatir",
-      episode: "White Trailer",
-      nameFight: "White Trailer",
-      nameSoundtrack: "Mirror, Mirror",
-      fightVideo: "https://www.youtube.com/embed/Vt9vl8iAN5Q?si=oIKsOwqXeKDCJCGg"}
-    ];
+    ReactDOM.render(<AppTabla/>, document.getElementById('root'));
 
-    function App() {
-      return <AppTabla datos={datos} />;
-    }
-
-    const root = ReactDOM.createRoot(document.getElementById('root'))
-    root.render(<App />)
     </script>
+    
     <div class="gif-bottom">
       <img class="gif2" src="Gifs/TeamRWBY.gif" alt="RWBY">
       <h4>Made by Abby Donis</h4>
